@@ -16,9 +16,9 @@ public class GrammarParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		DECIMAL_INTEGER_CONST=1, OCTAL_INTEGER_CONST=2, HEXA_INTEGER_CONST=3, 
-		DECIMAL_REAL_CONST=4, OCTAL_REAL_CONST=5, HEXA_REAL_CONST=6, CONSTLIT=7, 
-		WS=8, NL=9, B=10, BACKSLASH=11, IG=12;
+		IDENT=1, DECIMAL_INTEGER_CONST=2, OCTAL_INTEGER_CONST=3, HEXA_INTEGER_CONST=4, 
+		DECIMAL_REAL_CONST=5, OCTAL_REAL_CONST=6, HEXA_REAL_CONST=7, CONSTLIT=8, 
+		WS=9, NL=10, B=11, IG=12;
 	public static final int
 		RULE_program = 0;
 	private static String[] makeRuleNames() {
@@ -30,16 +30,15 @@ public class GrammarParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, "'\\n'", null, 
-			"'''"
+			null, null, null, null, null, null, null, null, null, null, "'\\n'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "DECIMAL_INTEGER_CONST", "OCTAL_INTEGER_CONST", "HEXA_INTEGER_CONST", 
+			null, "IDENT", "DECIMAL_INTEGER_CONST", "OCTAL_INTEGER_CONST", "HEXA_INTEGER_CONST", 
 			"DECIMAL_REAL_CONST", "OCTAL_REAL_CONST", "HEXA_REAL_CONST", "CONSTLIT", 
-			"WS", "NL", "B", "BACKSLASH", "IG"
+			"WS", "NL", "B", "IG"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -95,6 +94,10 @@ public class GrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
+		public List<TerminalNode> IDENT() { return getTokens(GrammarParser.IDENT); }
+		public TerminalNode IDENT(int i) {
+			return getToken(GrammarParser.IDENT, i);
+		}
 		public List<TerminalNode> DECIMAL_INTEGER_CONST() { return getTokens(GrammarParser.DECIMAL_INTEGER_CONST); }
 		public TerminalNode DECIMAL_INTEGER_CONST(int i) {
 			return getToken(GrammarParser.DECIMAL_INTEGER_CONST, i);
@@ -169,7 +172,7 @@ public class GrammarParser extends Parser {
 				{
 				setState(2);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 2046L) != 0)) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 4094L) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -182,7 +185,7 @@ public class GrammarParser extends Parser {
 				setState(5); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 2046L) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 4094L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -199,11 +202,11 @@ public class GrammarParser extends Parser {
 	public static final String _serializedATN =
 		"\u0004\u0001\f\b\u0002\u0000\u0007\u0000\u0001\u0000\u0004\u0000\u0004"+
 		"\b\u0000\u000b\u0000\f\u0000\u0005\u0001\u0000\u0000\u0000\u0001\u0000"+
-		"\u0000\u0001\u0001\u0000\u0001\n\u0007\u0000\u0003\u0001\u0000\u0000\u0000"+
-		"\u0002\u0004\u0007\u0000\u0000\u0000\u0003\u0002\u0001\u0000\u0000\u0000"+
-		"\u0004\u0005\u0001\u0000\u0000\u0000\u0005\u0003\u0001\u0000\u0000\u0000"+
-		"\u0005\u0006\u0001\u0000\u0000\u0000\u0006\u0001\u0001\u0000\u0000\u0000"+
-		"\u0001\u0005";
+		"\u0000\u0001\u0001\u0000\u0001\u000b\u0007\u0000\u0003\u0001\u0000\u0000"+
+		"\u0000\u0002\u0004\u0007\u0000\u0000\u0000\u0003\u0002\u0001\u0000\u0000"+
+		"\u0000\u0004\u0005\u0001\u0000\u0000\u0000\u0005\u0003\u0001\u0000\u0000"+
+		"\u0000\u0005\u0006\u0001\u0000\u0000\u0000\u0006\u0001\u0001\u0000\u0000"+
+		"\u0000\u0001\u0005";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

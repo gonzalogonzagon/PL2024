@@ -5,8 +5,17 @@ grammar Grammar;
  */
 
 //Parte del programa principal
+/*program :
+    defines partes
+;
+defines :
+    '#define' CONSTLIT
+    |
+;
+*/
 program :
-    (DECIMAL_INTEGER_CONST | OCTAL_INTEGER_CONST | HEXA_INTEGER_CONST
+    ( IDENT
+    | DECIMAL_INTEGER_CONST | OCTAL_INTEGER_CONST | HEXA_INTEGER_CONST
     | DECIMAL_REAL_CONST | OCTAL_REAL_CONST | HEXA_REAL_CONST
     | CONSTLIT
     | WS | B | NL)+
@@ -17,6 +26,7 @@ program :
  */
 
 //Identificadores
+IDENT:  ([a-zA-Z] | '$') ([a-zA-Z] | [0-9] | '$' | '_')*;
 
 //Constantes numéricas
 DECIMAL_INTEGER_CONST: ('+'|'-')? DEC_DIGIT+;
