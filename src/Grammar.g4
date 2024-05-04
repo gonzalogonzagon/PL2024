@@ -18,12 +18,12 @@ grammar Grammar;
  */
 //Parte del programa principal
 program :
-    {Constantes $cons = new Constantes();} defines[true] {codigo.leerConst($defines.s);} partes <EOF>
+    defines[Constantes cons] {codigo.leerConst($defines.s);} partes <EOF>
     ;
 
-defines [bool first]returns [Constantes cons]: '#define' {Elemento elem = new Elemento();} IDENT {elem.setId($IDENT.text)} ctes {elem.setValor($ctes.s); $cons.anadirElemento(elem)} defines[false]
-    {$cons = }
-    | {$s = "";}
+defines[Constantes cons] returns [Constantes constantes]: '#define' {$cons = new Constantes(); Elemento elem = new Elemento();} IDENT {elem.setId($IDENT.text)} ctes {elem.setValor($ctes.s); $cons.anadirElemento(elem)} defines[false]
+    {$constantes = cons;}
+    | {$constantes = cons;}
     ;
 ctes returns [String s]:
     CONSTINT {$s = $CONSTINT.text;}
