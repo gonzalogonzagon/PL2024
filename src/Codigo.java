@@ -49,7 +49,7 @@ public class Codigo {
                 main = funcion;
             }
         }
-        s += main.getVariables().imprimirVariables() + "\n";
+        s += main.getVariables().imprimirVariables();
         s += main.getBloque().imprimirBloque();
         s += "end.";
         return s;
