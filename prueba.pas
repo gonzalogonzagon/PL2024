@@ -14,19 +14,26 @@ var
 	var1: INTEGER;
 	var2: REAL;
 	var3: REAL;
-	d: REAL;
 begin
 	a := 6;
 	radio := 5;
 	calcularAreaCirculo();
-	if(b < b) then
+	if(q < q) then
 	begin
-			a := 2 * 4;
+		else
+	begin
+	y := 54 - 23;
+		else
+	begin
+	y := 54 - 23;
+
+	end;
 
 	end
 	else
-		begin
-		
+	begin
+		b := 1 mod 6;
+
 	end;
 	printf();
 end.

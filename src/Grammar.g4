@@ -80,9 +80,9 @@ sent[Variables var, Bloque b, String func] :
     | 'return' exp ';'{String sent = $func + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     // (Parte opcional)
     | {bloqueAux.resetSentencias();} 'if' '(' lcond ')'
-    {String sent = "if(" + $lcond.s + ") then"; b.anadirSentencia(new Sentencia(sent, inden)); b.anadirSentencia(new Sentencia("begin", inden)); inden += 1;}
+    {String sent = "if(" + $lcond.s + ") then"; b.anadirSentencia(new Sentencia(sent, inden)); b.anadirSentencia(new Sentencia("begin", inden));}
     blq[var, bloqueAux, null] {sent = bloqueAux.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, inden)); inden -= 1; b.anadirSentencia(new Sentencia("end", 0));}
-    {bloqueAux.resetSentencias();} 'else' {b.anadirSentencia(new Sentencia("else", inden)); b.anadirSentencia(new Sentencia("begin", inden)); inden += 1;}
+    {bloqueAux.resetSentencias();} 'else' {b.anadirSentencia(new Sentencia("else", inden)); b.anadirSentencia(new Sentencia("begin", inden)); }
     blq[var, bloqueAux, null] {
     sent = bloqueAux.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, inden)); inden -= 1; b.anadirSentencia(new Sentencia("end;", inden));}
     | 'while' '(' lcond ')' blq[null, new Bloque(), null]

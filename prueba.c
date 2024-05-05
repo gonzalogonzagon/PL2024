@@ -19,10 +19,16 @@ void main(void) {
     calcularAreaCirculo();
 
 
-    if (a < b) {
-    a = 2 * 4;
+    if (c < q) {
+        a = 2 * 4;
+        if(a == d) {
+        d = 4 / 1;
+        } else {
+            y = 54 - 23;
+        }
+
     } else {
-    float d;
+    b = 1 % 6;
     }
 
     printf();
