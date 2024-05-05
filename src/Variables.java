@@ -8,6 +8,10 @@ public class Variables {
         datos = new ArrayList<>();
     }
 
+    public List<Elemento> getDatos() {
+        return datos;
+    }
+
     public void anadirElemento(Elemento elemento){
         datos.add(elemento);
     }
