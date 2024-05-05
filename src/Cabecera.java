@@ -12,6 +12,10 @@ public class Cabecera {
         this.tipo = tipo;
     }
 
+    public List<Elemento> getDatos() {
+        return datos;
+    }
+
     public String imprimirCabecera(){
         String s = "";
         for (int i = 0; i < datos.size(); i++) {

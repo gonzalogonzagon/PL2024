@@ -21,7 +21,23 @@ public class Subprograma {
 
     public String imprimirSubprograma() {
         String s="";
-        s+= "function " + getNombre() + "(" + cabecera.imprimirCabecera() + "): " + cabecera.getTipo() + ";\n";
+        if(cabecera.getTipo().equals("VOID")){
+            s += "procedure " + getNombre();
+        }else{
+            s += "function " + getNombre();
+        }
+        if(!(cabecera.getDatos().size() == 1 && cabecera.getDatos().get(0).getTipo().equals("VOID"))){
+            if(cabecera.getTipo().equals("VOID")){
+                s += "(" + cabecera.imprimirCabecera() + ")";
+            }else{
+                s += "(" + cabecera.imprimirCabecera() + "): ";
+            }
+        }
+        if(cabecera.getTipo().equals("VOID")){
+            s += ";\n";
+        }else{
+            s += cabecera.getTipo() + ";\n";
+        }
         s += variables.imprimirVariables() + "\n";
         s+= bloque.imprimirBloque();
         s+= "end;\n";
