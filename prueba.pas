@@ -10,7 +10,6 @@ begin
 	calcularAreaCirculo := PI * radio * radio;
 end;
 
-procedure main;
 var
 	var1: INTEGER;
 	var2: REAL;
@@ -20,9 +19,4 @@ begin
 	radio := 5;
 	calcularAreaCirculo();
 	printf();
-	main := pepe;
-end;
-
-
-begin
 end.
