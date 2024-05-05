@@ -91,8 +91,11 @@ sent[Variables var, Bloque b, String func, int ind] :
     blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque() + getInd(ind) + "end"; b.anadirSentencia(new Sentencia(sent, ind));}
     'else' {b.anadirSentencia(new Sentencia("else", ind)); b.anadirSentencia(new Sentencia("begin", ind)); nuevoBl = new Bloque();}
     blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque() + getInd(ind) + "end;"; b.anadirSentencia(new Sentencia(sent, ind));}
-    | 'while' '(' lcond ')' blq[null, new Bloque(), null, ind + 1]
-    | 'do' blq[null, new Bloque(), null, ind + 1] 'until' '(' lcond ')'
+    | 'while' '(' lcond ')' {String sent = "while(" + $lcond.s + ")do"; b.anadirSentencia(new Sentencia(sent, ind)); b.anadirSentencia(new Sentencia("begin", ind)); Bloque nuevoBl = new Bloque();}
+    blq[null, nuevoBl, null, ind + 1] {sent = nuevoBl.imprimirBloque() + getInd(ind) + "end;"; b.anadirSentencia(new Sentencia(sent, ind));}
+    | 'do' {String sent = "repeat"; b.anadirSentencia(new Sentencia(sent, ind)); Bloque nuevoBl = new Bloque();}
+    blq[null, nuevoBl, null, ind + 1] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, ind));}
+    'until' '(' lcond ')' {sent = "until(" + $lcond.s + ");"; b.anadirSentencia(new Sentencia(sent, ind));}
     | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[null, new Bloque(), null, ind + 1]
     ;
 // modificada --- original -> lid : IDENT | lid ',' IDENT;
