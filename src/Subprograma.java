@@ -28,6 +28,9 @@ public class Subprograma {
         this.nombre = nombre;
     }
 
+    public Variables getVariables() {
+        return variables;
+    }
 
     public String imprimirSubprograma() {
         String s="";

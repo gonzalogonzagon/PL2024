@@ -2,7 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bloque {
-    List<Sentencia> sentencias = new ArrayList<>();
+    List<Sentencia> sentencias;
+
+    public Bloque(){
+        sentencias = new ArrayList<>();
+    }
     public String imprimirBloque(){
         String s = "";
         s += "begin\n";
