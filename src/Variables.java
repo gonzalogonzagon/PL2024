@@ -38,15 +38,19 @@ public class Variables {
             }
         }
         if(!tipoInteger.isEmpty()){
-            for (Elemento elemento : datos) {
-                s += elemento.getId() + ", ";
+            s += "\t";
+            for(int i = 0; i < tipoInteger.size() - 1; i++){
+                s += tipoInteger.get(i).getId() + ", ";
             }
+            s += tipoInteger.get(tipoInteger.size() - 1);
             s += ": INTEGER;\n";
         }
         if(!tipoFloat.isEmpty()){
-            for (Elemento elemento : datos) {
-                s += elemento.getId() + ", ";
+            s += "\t";
+            for(int i = 0; i < tipoFloat.size() - 1; i++){
+                s += tipoFloat.get(i).getId() + ", ";
             }
+            s += tipoFloat.get(tipoFloat.size() - 1);
             s += ": REAL;\n";
         }
         return s;
