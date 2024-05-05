@@ -6,14 +6,19 @@
 
 // Función para calcular el área de un círculo
 float calcularAreaCirculo(int radio) {
+    a = 5;
+    f(a);
     return PI * radio * radio;
 }
-void main( void) {
+
+void main(void) {
+    int var1;
+    float var2, var3;
+    a = 6;
     radio = 5;
-    //float area = calcularAreaCirculo(radio);
+    calcularAreaCirculo();
 
-    //printf("Radio del círculo: %.2f\n", radio);
-    //printf("Área del círculo: %.2f\n", area);
+    printf();
 
-    //return 0;
+    return pepe;
 }

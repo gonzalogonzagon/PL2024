@@ -13,7 +13,6 @@ grammar Grammar;
         codigo = code;
         constantes = cons;
 
-
     }
 }
 
@@ -78,10 +77,10 @@ sent[Variables var, Bloque b, String func] :
     | IDENT '(' ')' ';'{String sent = $IDENT.text + "()" + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     | 'return' exp ';'{String sent = $func + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     // (Parte opcional)
-    | 'if' '(' lcond ')' blq[var] 'else' blq[var]
-    | 'while' '(' lcond ')' blq[var]
-    | 'do' blq[var] 'until' '(' lcond ')'
-    | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[var]
+    | 'if' '(' lcond ')' blq[var, b, func] 'else' blq[var, b, func]
+    | 'while' '(' lcond ')' blq[var, b, func]
+    | 'do' blq[var, b, func] 'until' '(' lcond ')'
+    | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[var, b, func]
     ;
 // modificada --- original -> lid : IDENT | lid ',' IDENT;
 lid[Variables var, String t] :
@@ -101,10 +100,10 @@ lexpp returns [String s]:
     ;
 // modificada --- original -> exp : exp op exp | factor;
 exp returns [String s]:
-    factor expp {$s = $factor.s + " " + $expp.s;}
+    factor expp {$s = $factor.s + $expp.s;}
     ;
 expp returns [String s]:
-    op factor expp {$s = $op.s + " " + $factor.s + " " + $expp.s;}
+    op factor expp {$s = " " + $op.s + " " + $factor.s + $expp.s;}
     | {$s = "";}
     ;
 op returns [String s]:
