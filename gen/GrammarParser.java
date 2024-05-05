@@ -111,7 +111,6 @@ public class GrammarParser extends Parser {
 	    // Variables utilizadas en el analizador
 	    private Constantes constantes;
 	    private Bloque bloqueAux;
-	    private int inden = 0;
 
 	    // Declarar objeto
 	    private Codigo codigo;
@@ -123,6 +122,14 @@ public class GrammarParser extends Parser {
 	        constantes = cons;
 	        bloqueAux = bloque;
 	    }
+
+	    private String getInd(int indentacion){
+	            String inde = "";
+	            for (int i = 0; i <= indentacion; i++) {
+	                inde += "\t";
+	            }
+	            return inde;
+	        }
 
 	public GrammarParser(TokenStream input) {
 		super(input);
@@ -498,7 +505,7 @@ public class GrammarParser extends Parser {
 				setState(90);
 				match(T__2);
 				setState(91);
-				blq(subp.getVariables(), subp.getBloque(), subp.getNombre());
+				blq(subp.getVariables(), subp.getBloque(), subp.getNombre(), 0);
 				}
 				break;
 			case 2:
@@ -514,7 +521,7 @@ public class GrammarParser extends Parser {
 				setState(97);
 				match(T__2);
 				setState(98);
-				blq(subp.getVariables(), subp.getBloque(), subp.getNombre());
+				blq(subp.getVariables(), subp.getBloque(), subp.getNombre(), 0);
 				}
 				break;
 			}
@@ -535,15 +542,17 @@ public class GrammarParser extends Parser {
 		public Variables var;
 		public Bloque b;
 		public String func;
+		public int ind;
 		public SentlistContext sentlist() {
 			return getRuleContext(SentlistContext.class,0);
 		}
 		public BlqContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
-		public BlqContext(ParserRuleContext parent, int invokingState, Variables var, Bloque b, String func) {
+		public BlqContext(ParserRuleContext parent, int invokingState, Variables var, Bloque b, String func, int ind) {
 			super(parent, invokingState);
 			this.var = var;
 			this.b = b;
 			this.func = func;
+			this.ind = ind;
 		}
 		@Override public int getRuleIndex() { return RULE_blq; }
 		@Override
@@ -561,8 +570,8 @@ public class GrammarParser extends Parser {
 		}
 	}
 
-	public final BlqContext blq(Variables var,Bloque b,String func) throws RecognitionException {
-		BlqContext _localctx = new BlqContext(_ctx, getState(), var, b, func);
+	public final BlqContext blq(Variables var,Bloque b,String func,int ind) throws RecognitionException {
+		BlqContext _localctx = new BlqContext(_ctx, getState(), var, b, func, ind);
 		enterRule(_localctx, 12, RULE_blq);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -570,7 +579,7 @@ public class GrammarParser extends Parser {
 			setState(101);
 			match(T__4);
 			setState(102);
-			sentlist(var, b, func);
+			sentlist(var, b, func, ind);
 			setState(103);
 			match(T__5);
 			}
@@ -792,6 +801,7 @@ public class GrammarParser extends Parser {
 		public Variables var;
 		public Bloque b;
 		public String func;
+		public int ind;
 		public SentContext sent() {
 			return getRuleContext(SentContext.class,0);
 		}
@@ -799,11 +809,12 @@ public class GrammarParser extends Parser {
 			return getRuleContext(SentlisttContext.class,0);
 		}
 		public SentlistContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
-		public SentlistContext(ParserRuleContext parent, int invokingState, Variables var, Bloque b, String func) {
+		public SentlistContext(ParserRuleContext parent, int invokingState, Variables var, Bloque b, String func, int ind) {
 			super(parent, invokingState);
 			this.var = var;
 			this.b = b;
 			this.func = func;
+			this.ind = ind;
 		}
 		@Override public int getRuleIndex() { return RULE_sentlist; }
 		@Override
@@ -821,16 +832,16 @@ public class GrammarParser extends Parser {
 		}
 	}
 
-	public final SentlistContext sentlist(Variables var,Bloque b,String func) throws RecognitionException {
-		SentlistContext _localctx = new SentlistContext(_ctx, getState(), var, b, func);
+	public final SentlistContext sentlist(Variables var,Bloque b,String func,int ind) throws RecognitionException {
+		SentlistContext _localctx = new SentlistContext(_ctx, getState(), var, b, func, ind);
 		enterRule(_localctx, 20, RULE_sentlist);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(127);
-			sent(var, b, func);
+			sent(var, b, func, ind);
 			setState(128);
-			sentlistt(var, b, func);
+			sentlistt(var, b, func, ind);
 			}
 		}
 		catch (RecognitionException re) {
@@ -849,6 +860,7 @@ public class GrammarParser extends Parser {
 		public Variables var;
 		public Bloque b;
 		public String func;
+		public int ind;
 		public SentContext sent() {
 			return getRuleContext(SentContext.class,0);
 		}
@@ -856,11 +868,12 @@ public class GrammarParser extends Parser {
 			return getRuleContext(SentlisttContext.class,0);
 		}
 		public SentlisttContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
-		public SentlisttContext(ParserRuleContext parent, int invokingState, Variables var, Bloque b, String func) {
+		public SentlisttContext(ParserRuleContext parent, int invokingState, Variables var, Bloque b, String func, int ind) {
 			super(parent, invokingState);
 			this.var = var;
 			this.b = b;
 			this.func = func;
+			this.ind = ind;
 		}
 		@Override public int getRuleIndex() { return RULE_sentlistt; }
 		@Override
@@ -878,8 +891,8 @@ public class GrammarParser extends Parser {
 		}
 	}
 
-	public final SentlisttContext sentlistt(Variables var,Bloque b,String func) throws RecognitionException {
-		SentlisttContext _localctx = new SentlisttContext(_ctx, getState(), var, b, func);
+	public final SentlisttContext sentlistt(Variables var,Bloque b,String func,int ind) throws RecognitionException {
+		SentlisttContext _localctx = new SentlisttContext(_ctx, getState(), var, b, func, ind);
 		enterRule(_localctx, 22, RULE_sentlistt);
 		try {
 			setState(134);
@@ -897,9 +910,9 @@ public class GrammarParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(130);
-				sent(var, b, func);
+				sent(var, b, func, ind);
 				setState(131);
-				sentlistt(var, b, func);
+				sentlistt(var, b, func, ind);
 				}
 				break;
 			case T__5:
@@ -927,6 +940,7 @@ public class GrammarParser extends Parser {
 		public Variables var;
 		public Bloque b;
 		public String func;
+		public int ind;
 		public TypeContext type;
 		public Token IDENT;
 		public ExpContext exp;
@@ -961,11 +975,12 @@ public class GrammarParser extends Parser {
 			return getRuleContext(BlqContext.class,i);
 		}
 		public SentContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
-		public SentContext(ParserRuleContext parent, int invokingState, Variables var, Bloque b, String func) {
+		public SentContext(ParserRuleContext parent, int invokingState, Variables var, Bloque b, String func, int ind) {
 			super(parent, invokingState);
 			this.var = var;
 			this.b = b;
 			this.func = func;
+			this.ind = ind;
 		}
 		@Override public int getRuleIndex() { return RULE_sent; }
 		@Override
@@ -983,8 +998,8 @@ public class GrammarParser extends Parser {
 		}
 	}
 
-	public final SentContext sent(Variables var,Bloque b,String func) throws RecognitionException {
-		SentContext _localctx = new SentContext(_ctx, getState(), var, b, func);
+	public final SentContext sent(Variables var,Bloque b,String func,int ind) throws RecognitionException {
+		SentContext _localctx = new SentContext(_ctx, getState(), var, b, func, ind);
 		enterRule(_localctx, 24, RULE_sent);
 		try {
 			setState(202);
@@ -1068,16 +1083,16 @@ public class GrammarParser extends Parser {
 				((SentContext)_localctx).lcond = lcond();
 				setState(166);
 				match(T__2);
-				String sent = "if(" + ((SentContext)_localctx).lcond.s + ")then"; b.anadirSentencia(new Sentencia(sent, 0)); b.anadirSentencia(new Sentencia("begin", 0));Bloque nuevoBl = new Bloque();
+				String sent = "if(" + ((SentContext)_localctx).lcond.s + ")then"; b.anadirSentencia(new Sentencia(sent, ind)); b.anadirSentencia(new Sentencia("begin", ind));Bloque nuevoBl = new Bloque();
 				setState(168);
-				blq(var, nuevoBl, func);
-				sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, 0)); b.anadirSentencia(new Sentencia("end", 0));
+				blq(var, nuevoBl, func, ind + 1);
+				sent = nuevoBl.imprimirBloque() + getInd(ind) + "end"; b.anadirSentencia(new Sentencia(sent, ind));
 				setState(170);
 				match(T__13);
-				b.anadirSentencia(new Sentencia("else", 0)); b.anadirSentencia(new Sentencia("begin", 0)); nuevoBl = new Bloque();
+				b.anadirSentencia(new Sentencia("else", ind)); b.anadirSentencia(new Sentencia("begin", ind)); nuevoBl = new Bloque();
 				setState(172);
-				blq(var, nuevoBl, func);
-				sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, 0)); b.anadirSentencia(new Sentencia("end", 0));
+				blq(var, nuevoBl, func, ind + 1);
+				sent = nuevoBl.imprimirBloque() + getInd(ind) + "end;"; b.anadirSentencia(new Sentencia(sent, ind));
 				}
 				break;
 			case 7:
@@ -1092,7 +1107,7 @@ public class GrammarParser extends Parser {
 				setState(178);
 				match(T__2);
 				setState(179);
-				blq(null, new Bloque(), null);
+				blq(null, new Bloque(), null, ind + 1);
 				}
 				break;
 			case 8:
@@ -1101,7 +1116,7 @@ public class GrammarParser extends Parser {
 				setState(181);
 				match(T__15);
 				setState(182);
-				blq(null, new Bloque(), null);
+				blq(null, new Bloque(), null, ind + 1);
 				setState(183);
 				match(T__16);
 				setState(184);
@@ -1140,7 +1155,7 @@ public class GrammarParser extends Parser {
 				setState(199);
 				match(T__2);
 				setState(200);
-				blq(null, new Bloque(), null);
+				blq(null, new Bloque(), null, ind + 1);
 				}
 				break;
 			}

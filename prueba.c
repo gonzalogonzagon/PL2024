@@ -25,6 +25,11 @@ void main(void) {
         d = 4 / 1;
         } else {
             y = 54 - 23;
+            if(!a < b) {
+            a = 5 * 3;
+            } else {
+            q = 7 / 3;
+            }
         }
 
     } else {
