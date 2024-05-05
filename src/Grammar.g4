@@ -122,31 +122,31 @@ factor returns [String s]:
     ;
 
 // (Parte opcional)
-lcond :
-    cond2Types
-    | cond2Types opl cond2Types lcondd
+lcond returns [String s]:
+    cond2Types {$s = $cond2Types.s;}
+    | cond2Types {$s = $cond2Types.s + " ";} opl cond2Types lcondd {$s += $opl.s + " " + $cond2Types.s + $lcondd.s;}
     ;
-lcondd :
-    opl cond2Types lcondd
+lcondd returns [String s]:
+    opl cond2Types lcondd {$s = " " + $opl.s + " " + $cond2Types.s + $lcondd.s;}
     |
     ;
-opl :
-    '||'
-    | '&&'
+opl returns [String s]:
+    '||' {$s = "OR";}
+    | '&&' {$s = "AND";}
     ;
-cond2Types :
-    cond
-    | '!' cond
+cond2Types returns [String s]:
+    cond {$s = $cond.s;}
+    | '!' cond {$s = "NOT (" + $cond.s + ")";}
     ;
-cond :
-    exp opr exp
+cond returns [String s]:
+    exp opr exp {$s = $exp.s + " " + $opr.s + " " + $exp.s;}
     ;
-opr :
-    '=='
-    | '<'
-    | '>'
-    | '>='
-    | '<='
+opr returns [String s]:
+    '==' {$s = "=";}
+    | '<' {$s = "<";}
+    | '>' {$s = ">";}
+    | '>=' {$s = ">=";}
+    | '<=' {$s = "<=";}
     ;
 
 /*
