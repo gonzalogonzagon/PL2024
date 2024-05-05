@@ -2,7 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Variables {
-    private List<Elemento> datos = new ArrayList<>();
+    private List<Elemento> datos;
+
+    public Variables(){
+        datos = new ArrayList<>();
+    }
 
     public void anadirElemento(Elemento elemento){
         datos.add(elemento);
