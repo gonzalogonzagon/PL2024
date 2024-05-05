@@ -80,9 +80,9 @@ sent[Variables var, Bloque b, String func, int ind] :
     // (Parte opcional)
     | 'if' '(' lcond ')'
     {String sent = "if(" + $lcond.s + ")then"; b.anadirSentencia(new Sentencia(sent, ind)); b.anadirSentencia(new Sentencia("begin", ind));Bloque nuevoBl = new Bloque();}
-    blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent + "end", ind));}
+    blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, ind));  b.anadirSentencia(new Sentencia("end", ind));}
     'else' {b.anadirSentencia(new Sentencia("else", ind)); b.anadirSentencia(new Sentencia("begin", ind)); nuevoBl = new Bloque();}
-    blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent + "end;", ind));}
+    blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, ind));  b.anadirSentencia(new Sentencia("end;", ind));}
     | 'while' '(' lcond ')' blq[null, new Bloque(), null, ind + 1]
     | 'do' blq[null, new Bloque(), null, ind + 1] 'until' '(' lcond ')'
     | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[null, new Bloque(), null, ind + 1]
