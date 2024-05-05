@@ -7,6 +7,11 @@ public class Bloque {
     public Bloque(){
         sentencias = new ArrayList<>();
     }
+
+    public Sentencia anadirSentencia(Sentencia sentencia){
+        sentencias.add(sentencia);
+        return sentencia;
+    }
     public String imprimirBloque(){
         String s = "";
         s += "begin\n";

@@ -43,11 +43,11 @@ part[Subprograma subp]:
     type {subp.getCabecera().setTipo($type.s);} restpart[subp]
     ;
 restpart [Subprograma subp]:
-    IDENT {subp.setNombre($IDENT.text);} '(' listparam[subp.getCabecera()] ')' blq[subp.getVariables()]
-    | IDENT {subp.setNombre($IDENT.text);} '(' 'void' ')' blq[subp.getVariables()]
+    IDENT {subp.setNombre($IDENT.text);} '(' listparam[subp.getCabecera()] ')' blq[subp.getVariables(), subp.getBloque()]
+    | IDENT {subp.setNombre($IDENT.text);} '(' 'void' ')' blq[subp.getVariables(), subp.getBloque()]
     ;
-blq[Variables var] :
-    '{' sentlist[var] '}'
+blq[Variables var, Bloque b] :
+    '{' sentlist[var, b] '}'
     ;
 // modificada --- original -> listparam : listparam ',' type IDENT | type IDENT; //!
 listparam [Cabecera cab] :
@@ -64,19 +64,19 @@ type returns [String s]:
     ;
 
 // modificada --- original -> sentlist : sentlist sent | sent;
-sentlist[Variables var] :
-    sent[var] sentlistt[var]
+sentlist[Variables var, Bloque b] :
+    sent[var, b] sentlistt[var, b]
     ;
-sentlistt[Variables var] :
-    sent[var] sentlistt[var]
+sentlistt[Variables var, Bloque b] :
+    sent[var, b] sentlistt[var, b]
     |
     ;
-sent[Variables var] :
+sent[Variables var, Bloque b] :
     type lid[var, $type.s] ';'
-    | IDENT '=' exp ';'
-    | IDENT '(' lexp ')' ';'
-    | IDENT '(' ')' ';'
-    | 'return' exp ';'
+    | IDENT '=' exp ';'{String sent = $IDENT.text + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
+    | IDENT '(' lexp ')' ';'{String sent = $IDENT.text + "(" + $lexp.s + ")" + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
+    | IDENT '(' ')' ';'{String sent = $IDENT.text + "()" + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
+    | 'return' exp ';'{String sent = $func + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     // (Parte opcional)
     | 'if' '(' lcond ')' blq[var] 'else' blq[var]
     | 'while' '(' lcond ')' blq[var]

@@ -24,6 +24,10 @@ public class Subprograma {
         return nombre;
     }
 
+    public Bloque getBloque() {
+        return bloque;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
