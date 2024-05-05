@@ -37,6 +37,9 @@ public class Codigo {
         String s = "";
         s += "program " + nombreArchivo + ";\n";
         s += constantes.imprimirConstantes();
+        if(!constantes.getDatos().isEmpty()){
+            s += "\n";
+        }
         for(Subprograma funcion: lista_funciones){
             s += funcion.imprimirSubprograma();
             s += "\n";

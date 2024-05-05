@@ -8,6 +8,10 @@ public class Constantes { //Lista de constantes
         datos.add(elemento);
     }
 
+    public List<Elemento> getDatos() {
+        return datos;
+    }
+
     public String imprimirConstantes(){
         String s = "";
         if(!datos.isEmpty()){
