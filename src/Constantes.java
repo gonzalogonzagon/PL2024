@@ -14,6 +14,7 @@ public class Constantes { //Lista de constantes
             s += "const\n";
         }
         for(Elemento elemento: datos){
+            s += "\t";
             s += elemento.getId() + "= " + elemento.getValor() + ";\n";
         }
         return s;

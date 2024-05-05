@@ -14,6 +14,7 @@ public class Variables {
             s += "var\n";
         }
         for(Elemento elemento: datos){
+            s += "\t";
             s += elemento.getId() + ": " + elemento.getTipo() + ";\n";
         }
         return s;

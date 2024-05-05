@@ -8,6 +8,26 @@ public class Codigo {
     private Bloque bloque;
     private Constantes constantes;
 
+    public Codigo() {
+        variables = new Variables();
+        bloque = new Bloque();
+        constantes = new Constantes();
+    }
+
+    public Constantes getConstantes() {
+        return constantes;
+    }
+
+    public void setConstantes(Constantes constantes) {
+        this.constantes = constantes;
+    }
+
+    public Variables getVariables() {
+        return variables;
+    }
+
+    
+
     public String imprimirCodigo(String nombreArchivo){
         //nombreArchivo es el nombre del programa (el nombre del archivo por defecto)
         String s = "";

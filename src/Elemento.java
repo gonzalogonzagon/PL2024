@@ -10,6 +10,10 @@ public class Elemento {
         this.valor = valor;
     }
 
+    public Elemento() {
+
+    }
+
     public String getValor() {
         return valor;
     }

@@ -2,14 +2,18 @@ grammar Grammar;
 
 @parser::members {
     // Variables utilizadas en el analizador
+    private Constantes constantes;
 
     // Declarar objeto
     private Codigo codigo;
 
     // Recibir como un parámetro del constructor el objeto real
-    public GrammarParser ( TokenStream input, Codigo code )  {
+    public GrammarParser ( TokenStream input, Codigo code, Constantes cons )  {
         this(input);
         codigo = code;
+        constantes = cons;
+
+
     }
 }
 
@@ -18,12 +22,13 @@ grammar Grammar;
  */
 //Parte del programa principal
 program :
-    defines[Constantes cons] {codigo.leerConst($defines.s);} partes <EOF>
+    defines partes <EOF>
     ;
 
-defines[Constantes cons] returns [Constantes constantes]: '#define' {$cons = new Constantes(); Elemento elem = new Elemento();} IDENT {elem.setId($IDENT.text)} ctes {elem.setValor($ctes.s); $cons.anadirElemento(elem)} defines[false]
-    {$constantes = cons;}
-    | {$constantes = cons;}
+defines:
+    '#define' {Elemento elem = new Elemento();} IDENT
+    {elem.setId($IDENT.text);} ctes {elem.setValor($ctes.s); constantes.anadirElemento(elem);} defines
+    |
     ;
 ctes returns [String s]:
     CONSTINT {$s = $CONSTINT.text;}
