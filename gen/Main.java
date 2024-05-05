@@ -18,7 +18,7 @@ public class Main {
 
 
             // Crear el objeto correspondiente al analizador sintáctico
-            GrammarParser anasint = new GrammarParser(tokens, codigo, codigo.getConstantes());
+            GrammarParser anasint = new GrammarParser(tokens, codigo, codigo.getConstantes(), new Bloque());
             /*
             Si se quiere pasar al analizador algún objeto externo con el que trabajar,
             este deberá ser de una clase del mismo paquete

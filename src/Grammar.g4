@@ -3,16 +3,17 @@ grammar Grammar;
 @parser::members {
     // Variables utilizadas en el analizador
     private Constantes constantes;
+    private Bloque bloqueAux;
 
     // Declarar objeto
     private Codigo codigo;
 
     // Recibir como un parámetro del constructor el objeto real
-    public GrammarParser ( TokenStream input, Codigo code, Constantes cons )  {
+    public GrammarParser ( TokenStream input, Codigo code, Constantes cons, Bloque bloque)  {
         this(input);
         codigo = code;
         constantes = cons;
-
+        bloqueAux = bloque;
     }
 }
 
@@ -77,8 +78,8 @@ sent[Variables var, Bloque b, String func] :
     | IDENT '(' ')' ';'{String sent = $IDENT.text + "()" + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     | 'return' exp ';'{String sent = $func + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     // (Parte opcional)
-    | 'if' '(' lcond ')' blq[null, new Bloque(), null] {String sent = "IF(" + $lcond.s + ")\n" + $blq.b.imprimirBloque() + "end;\n"}
-    'else' blq[null, new Bloque(), null] {sent += "ELSE\n" + $blq.b.imprimirBloque() + "end;\n"; b.anadirSentencia(new Sentencia(sent, 1));}
+    | {bloqueAux.eliminarSentencias();} 'if' '(' lcond ')' blq[null, bloqueAux, null] {String sent = "IF(" + $lcond.s + ")\n" + $blq.bloqueAux.imprimirBloque() + "end;\n"}
+    {bloqueAux.eliminarSentencias();} 'else' blq[null, bloqueAux, null] {sent += "ELSE\n" + $blq.bloqueAux.imprimirBloque() + "end;\n"; b.anadirSentencia(new Sentencia(sent, 1));}
     | 'while' '(' lcond ')' blq[null, new Bloque(), null]
     | 'do' blq[null, new Bloque(), null] 'until' '(' lcond ')'
     | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[null, new Bloque(), null]

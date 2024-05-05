@@ -8,6 +8,10 @@ public class Bloque {
         sentencias = new ArrayList<>();
     }
 
+    public void eliminarSentencias(){
+        sentencias = null;
+    }
+
     public Sentencia anadirSentencia(Sentencia sentencia){
         sentencias.add(sentencia);
         return sentencia;
