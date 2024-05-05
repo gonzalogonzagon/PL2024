@@ -18,7 +18,6 @@ public class Bloque {
     }
     public String imprimirBloque(){
         String s = "";
-        s += "begin\n";
         for(Sentencia sentencia: sentencias){
             s += "\t" + colocarIdentacion(sentencia) + sentencia.imprimirSentencia();
         }

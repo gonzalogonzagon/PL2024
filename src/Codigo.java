@@ -50,6 +50,7 @@ public class Codigo {
             }
         }
         s += main.getVariables().imprimirVariables();
+        s += "begin\n";
         s += main.getBloque().imprimirBloque();
         s += "end.";
         return s;

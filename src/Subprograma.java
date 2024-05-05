@@ -52,8 +52,9 @@ public class Subprograma {
             s += ": " + cabecera.getTipo() + ";\n";
         }
         s += variables.imprimirVariables();
-        s+= bloque.imprimirBloque();
-        s+= "end;\n";
+        s += "begin\n";
+        s += bloque.imprimirBloque();
+        s += "end;\n";
         return s;
     }
 }
