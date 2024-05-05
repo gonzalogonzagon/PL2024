@@ -18,6 +18,13 @@ void main(void) {
     radio = 5;
     calcularAreaCirculo();
 
+
+    if (a < b) {
+    a = 2 * 4;
+    } else {
+    float d;
+    }
+
     printf();
 
 }

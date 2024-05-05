@@ -78,8 +78,8 @@ sent[Variables var, Bloque b, String func] :
     | IDENT '(' ')' ';'{String sent = $IDENT.text + "()" + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     | 'return' exp ';'{String sent = $func + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     // (Parte opcional)
-    | {bloqueAux.eliminarSentencias();} 'if' '(' lcond ')' blq[null, bloqueAux, null] {String sent = "IF(" + $lcond.s + ")\n" + $blq.bloqueAux.imprimirBloque() + "end;\n"}
-    {bloqueAux.eliminarSentencias();} 'else' blq[null, bloqueAux, null] {sent += "ELSE\n" + $blq.bloqueAux.imprimirBloque() + "end;\n"; b.anadirSentencia(new Sentencia(sent, 1));}
+    | {bloqueAux.resetSentencias();} 'if' '(' lcond ')' blq[var, bloqueAux, null] {String sent = "IF(" + $lcond.s + ")\n" + bloqueAux.imprimirBloque() + "end;\n";}
+    {bloqueAux.resetSentencias();} 'else' blq[var, bloqueAux, null] {sent += "ELSE\n" + bloqueAux.imprimirBloque() + "end;\n"; b.anadirSentencia(new Sentencia(sent, 1));}
     | 'while' '(' lcond ')' blq[null, new Bloque(), null]
     | 'do' blq[null, new Bloque(), null] 'until' '(' lcond ')'
     | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[null, new Bloque(), null]

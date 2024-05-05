@@ -8,8 +8,8 @@ public class Bloque {
         sentencias = new ArrayList<>();
     }
 
-    public void eliminarSentencias(){
-        sentencias = null;
+    public void resetSentencias(){
+        sentencias = new ArrayList<>();
     }
 
     public Sentencia anadirSentencia(Sentencia sentencia){
