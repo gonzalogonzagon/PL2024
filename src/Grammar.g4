@@ -79,10 +79,11 @@ sent[Variables var, Bloque b, String func] :
     | IDENT '(' ')' ';'{String sent = $IDENT.text + "()" + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     | 'return' exp ';'{String sent = $func + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     // (Parte opcional)
-    | 'if' '(' lcond ')' {String sent = "if(" + $lcond.s + ")then"; b.anadirSentencia(sent, 0); b.anadirSentencia("begin", 0);Bloque nuevoBl = new Bloque();}
-    blq[var, nuevoBl, func] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(sent, 0); b.anadirSentencia("end", 0);}
-    'else' {b.anadirSentencia("else", 0); b.anadirSentencia("begin", 0); nuevoBl = new Bloque();}
-    blq[var, nuevoBl, func] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(sent, 0); b.anadirSentencia("end", 0);}
+    | 'if' '(' lcond ')'
+    {String sent = "if(" + $lcond.s + ")then"; b.anadirSentencia(new Sentencia(sent, 0)); b.anadirSentencia(new Sentencia("begin", 0));Bloque nuevoBl = new Bloque();}
+    blq[var, nuevoBl, func] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, 0)); b.anadirSentencia(new Sentencia("end", 0));}
+    'else' {b.anadirSentencia(new Sentencia("else", 0)); b.anadirSentencia(new Sentencia("begin", 0)); nuevoBl = new Bloque();}
+    blq[var, nuevoBl, func] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, 0)); b.anadirSentencia(new Sentencia("end", 0));}
     | 'while' '(' lcond ')' blq[null, new Bloque(), null]
     | 'do' blq[null, new Bloque(), null] 'until' '(' lcond ')'
     | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[null, new Bloque(), null]
@@ -129,7 +130,7 @@ factor returns [String s]:
 // (Parte opcional)
 lcond returns [String s]:
     cond2Types {$s = $cond2Types.s;}
-    | cond2Types {$s = $cond2Types.s + " ";} opl cond2Types lcondd {$s += $opl.s + " " + $cond2Types.s + $lcondd.s;}
+    | c1=cond2Types {$s = $c1.s + " ";} opl c2=cond2Types lcondd {$s += $opl.s + " " + $c2.s + $lcondd.s;}
     ;
 lcondd returns [String s]:
     opl cond2Types lcondd {$s = " " + $opl.s + " " + $cond2Types.s + $lcondd.s;}
@@ -144,7 +145,7 @@ cond2Types returns [String s]:
     | '!' cond {$s = "NOT (" + $cond.s + ")";}
     ;
 cond returns [String s]:
-    exp opr exp {$s = $exp.s + " " + $opr.s + " " + $exp.s;}
+    e1=exp opr e2=exp {$s = $e1.s + " " + $opr.s + " " + $e2.s;}
     ;
 opr returns [String s]:
     '==' {$s = "=";}

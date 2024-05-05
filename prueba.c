@@ -19,7 +19,7 @@ void main(void) {
     calcularAreaCirculo();
 
 
-    if (c < q) {
+    if (q < e) {
         a = 2 * 4;
         if(a == d) {
         d = 4 / 1;

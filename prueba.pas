@@ -18,22 +18,25 @@ begin
 	a := 6;
 	radio := 5;
 	calcularAreaCirculo();
-	if(q < q) then
+	if(q < e)then
 	begin
-		else
+		a := 2 * 4;
+	if(a = d)then
 	begin
-	y := 54 - 23;
-		else
-	begin
-	y := 54 - 23;
+		d := 4 div 1;
 
-	end;
+	end
+	else
+	begin
+		y := 54 - 23;
+
+	end
 
 	end
 	else
 	begin
 		b := 1 mod 6;
 
-	end;
+	end
 	printf();
 end.
