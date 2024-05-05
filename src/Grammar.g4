@@ -79,10 +79,12 @@ sent[Variables var, Bloque b, String func] :
     | IDENT '(' ')' ';'{String sent = $IDENT.text + "()" + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     | 'return' exp ';'{String sent = $func + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     // (Parte opcional)
-    | {bloqueAux.resetSentencias();} 'if' '(' lcond ')' {String sent = "IF(" + $lcond.s + ")\n"; b.anadirSentencia(new Sentencia(sent, inden)); b.anadirSentencia(new Sentencia("begin\n", inden)); inden += 1;}
-    blq[var, bloqueAux, null] {sent = bloqueAux.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, inden)); inden -= 1; b.anadirSentencia(new Sentencia("end\n", 0));}
-    {bloqueAux.resetSentencias();} 'else' blq[var, bloqueAux, null] {b.anadirSentencia(new Sentencia("ELSE\n", inden)); inden += 1;
-    sent = bloqueAux.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, inden)); inden -= 1; b.anadirSentencia(new Sentencia("end;\n", 0));}
+    | {bloqueAux.resetSentencias();} 'if' '(' lcond ')'
+    {String sent = "if(" + $lcond.s + ") then"; b.anadirSentencia(new Sentencia(sent, inden)); b.anadirSentencia(new Sentencia("begin", inden)); inden += 1;}
+    blq[var, bloqueAux, null] {sent = bloqueAux.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, inden)); inden -= 1; b.anadirSentencia(new Sentencia("end", 0));}
+    {bloqueAux.resetSentencias();} 'else'
+    blq[var, bloqueAux, null] {b.anadirSentencia(new Sentencia("else", inden)); inden += 1; b.anadirSentencia(new Sentencia("begin", inden));
+    sent = bloqueAux.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, inden)); inden -= 1; b.anadirSentencia(new Sentencia("end;", 0));}
     | 'while' '(' lcond ')' blq[null, new Bloque(), null]
     | 'do' blq[null, new Bloque(), null] 'until' '(' lcond ')'
     | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[null, new Bloque(), null]
