@@ -4,6 +4,7 @@ import java.util.List;
 public class Codigo {
 
     List<Subprograma> lista_funciones = new ArrayList<>();
+    Subprograma main;
     private Variables variables;
     private Bloque bloque;
     private Constantes constantes;
@@ -41,11 +42,15 @@ public class Codigo {
             s += "\n";
         }
         for(Subprograma funcion: lista_funciones){
-            s += funcion.imprimirSubprograma();
-            s += "\n";
+            if(!funcion.getNombre().equals("main")){
+                s += funcion.imprimirSubprograma();
+                s += "\n";
+            }else{
+                main = funcion;
+            }
         }
-        s += variables.imprimirVariables() + "\n";
-        s += bloque.imprimirBloque();
+        s += main.getVariables().imprimirVariables() + "\n";
+        s += main.getBloque().imprimirBloque();
         s += "end.";
         return s;
     }
