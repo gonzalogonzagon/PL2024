@@ -4,7 +4,6 @@ grammar Grammar;
     // Variables utilizadas en el analizador
     private Constantes constantes;
     private Bloque bloqueAux;
-    private int inden = 0;
 
     // Declarar objeto
     private Codigo codigo;
@@ -44,11 +43,11 @@ part[Subprograma subp]:
     type {subp.getCabecera().setTipo($type.s);} restpart[subp]
     ;
 restpart [Subprograma subp]:
-    IDENT {subp.setNombre($IDENT.text);} '(' listparam[subp.getCabecera()] ')' blq[subp.getVariables(), subp.getBloque(), subp.getNombre()]
-    | IDENT {subp.setNombre($IDENT.text);} '(' 'void' ')' blq[subp.getVariables(), subp.getBloque(), subp.getNombre()]
+    IDENT {subp.setNombre($IDENT.text);} '(' listparam[subp.getCabecera()] ')' blq[subp.getVariables(), subp.getBloque(), subp.getNombre(), 0]
+    | IDENT {subp.setNombre($IDENT.text);} '(' 'void' ')' blq[subp.getVariables(), subp.getBloque(), subp.getNombre(), 0]
     ;
-blq[Variables var, Bloque b, String func] :
-    '{' sentlist[var, b, func] '}'
+blq[Variables var, Bloque b, String func, int ind] :
+    '{' sentlist[var, b, func, ind] '}'
     ;
 // modificada --- original -> listparam : listparam ',' type IDENT | type IDENT; //!
 listparam [Cabecera cab] :
@@ -65,14 +64,14 @@ type returns [String s]:
     ;
 
 // modificada --- original -> sentlist : sentlist sent | sent;
-sentlist[Variables var, Bloque b, String func] :
-    sent[var, b, func] sentlistt[var, b, func]
+sentlist[Variables var, Bloque b, String func, int ind] :
+    sent[var, b, func, ind] sentlistt[var, b, func, ind]
     ;
-sentlistt[Variables var, Bloque b, String func] :
-    sent[var, b, func] sentlistt[var, b, func]
+sentlistt[Variables var, Bloque b, String func, int ind] :
+    sent[var, b, func, ind] sentlistt[var, b, func, ind]
     |
     ;
-sent[Variables var, Bloque b, String func] :
+sent[Variables var, Bloque b, String func, int ind] :
     type lid[var, $type.s] ';'
     | IDENT '=' exp ';'{String sent = $IDENT.text + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     | IDENT '(' lexp ')' ';'{String sent = $IDENT.text + "(" + $lexp.s + ")" + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
@@ -80,13 +79,13 @@ sent[Variables var, Bloque b, String func] :
     | 'return' exp ';'{String sent = $func + " := " + $exp.s + ";"; b.anadirSentencia(new Sentencia(sent, 0));}
     // (Parte opcional)
     | 'if' '(' lcond ')'
-    {String sent = "if(" + $lcond.s + ")then"; b.anadirSentencia(new Sentencia(sent, 0)); b.anadirSentencia(new Sentencia("begin", 0));Bloque nuevoBl = new Bloque();}
-    blq[var, nuevoBl, func] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, 0)); b.anadirSentencia(new Sentencia("end", 0));}
-    'else' {b.anadirSentencia(new Sentencia("else", 0)); b.anadirSentencia(new Sentencia("begin", 0)); nuevoBl = new Bloque();}
-    blq[var, nuevoBl, func] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, 0)); b.anadirSentencia(new Sentencia("end", 0));}
-    | 'while' '(' lcond ')' blq[null, new Bloque(), null]
-    | 'do' blq[null, new Bloque(), null] 'until' '(' lcond ')'
-    | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[null, new Bloque(), null]
+    {String sent = "if(" + $lcond.s + ")then"; b.anadirSentencia(new Sentencia(sent, ind)); b.anadirSentencia(new Sentencia("begin", ind));Bloque nuevoBl = new Bloque();}
+    blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, ind)); b.anadirSentencia(new Sentencia("end", ind));}
+    'else' {b.anadirSentencia(new Sentencia("else", ind)); b.anadirSentencia(new Sentencia("begin", ind)); nuevoBl = new Bloque();}
+    blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, ind)); b.anadirSentencia(new Sentencia("end;", ind));}
+    | 'while' '(' lcond ')' blq[null, new Bloque(), null, ind + 1]
+    | 'do' blq[null, new Bloque(), null, ind + 1] 'until' '(' lcond ')'
+    | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[null, new Bloque(), null, ind + 1]
     ;
 // modificada --- original -> lid : IDENT | lid ',' IDENT;
 lid[Variables var, String t] :
