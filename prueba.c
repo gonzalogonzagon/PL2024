@@ -8,13 +8,12 @@
 float calcularAreaCirculo(int radio) {
     return PI * radio * radio;
 }
+void main( void) {
+    radio = 5;
+    //float area = calcularAreaCirculo(radio);
 
-int main(int pepe) {
-    int radio = 5.0;
-    float area = calcularAreaCirculo(radio);
+    //printf("Radio del círculo: %.2f\n", radio);
+    //printf("Área del círculo: %.2f\n", area);
 
-    printf("Radio del círculo: %.2f\n", radio);
-    printf("Área del círculo: %.2f\n", area);
-
-    return 0;
+    //return 0;
 }

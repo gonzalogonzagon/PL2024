@@ -10,6 +10,11 @@ public class Elemento {
         this.valor = valor;
     }
 
+    public Elemento(String id, String tipo) {
+        this.id = id;
+        this.tipo = tipo;
+    }
+
     public Elemento() {
 
     }

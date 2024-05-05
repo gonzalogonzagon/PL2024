@@ -36,25 +36,25 @@ ctes returns [String s]:
     | CONSTLIT {$s = $CONSTLIT.text;}
     ;
 partes :
-    part[new Subprograma()] partes
-    | part[new Subprograma()]
+    part[codigo.addSubprograma(new Subprograma())] partes
+    | part[codigo.addSubprograma(new Subprograma())]
     ;
 part[Subprograma subp]:
-    type {subp.getCabecera().setTipo($type.s);} restpart
+    type {subp.getCabecera().setTipo($type.s);} restpart[subp]
     ;
-restpart :
-    IDENT {subp.setNombre($IDENT.text)} '(' listparam ')' blq
-    | IDENT '(' 'void' ')' blq
+restpart [Subprograma subp]:
+    IDENT {subp.setNombre($IDENT.text);} '(' listparam[subp.getCabecera()] ')' blq
+    | IDENT {subp.setNombre($IDENT.text);} '(' 'void' ')' blq
     ;
 blq :
     '{' sentlist '}'
     ;
 // modificada --- original -> listparam : listparam ',' type IDENT | type IDENT; //!
-listparam :
-    type IDENT listparamm
+listparam [Cabecera cab] :
+    type IDENT {cab.addElemento(new Elemento($IDENT.text, $type.s));} listparamm[cab]
     ;
-listparamm :
-    ',' type IDENT listparamm
+listparamm [Cabecera cab]:
+    ',' type IDENT {cab.addElemento(new Elemento($IDENT.text, $type.s));} listparamm[cab]
     |
     ;
 type returns [String s]:

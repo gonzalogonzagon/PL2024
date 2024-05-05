@@ -5,13 +5,15 @@ public class Subprograma {
     private Variables variables;
 
     public Subprograma(Bloque bloque, Cabecera cabecera, Variables variables) {
-        this.bloque = bloque;
         this.cabecera = cabecera;
+        this.bloque = bloque;
         this.variables = variables;
     }
 
     public Subprograma(){
         cabecera = new Cabecera();
+        bloque = new Bloque();
+        variables = new Variables();
     }
 
     public Cabecera getCabecera() {
@@ -35,16 +37,12 @@ public class Subprograma {
             s += "function " + getNombre();
         }
         if(!cabecera.getDatos().isEmpty()){
-            if(cabecera.getTipo().equals("VOID")){
-                s += "(" + cabecera.imprimirCabecera() + ")";
-            }else{
-                s += "(" + cabecera.imprimirCabecera() + "): ";
-            }
+            s += "(" + cabecera.imprimirCabecera() + ")";
         }
         if(cabecera.getTipo().equals("VOID")){
             s += ";\n";
         }else{
-            s += cabecera.getTipo() + ";\n";
+            s += ": " + cabecera.getTipo() + ";\n";
         }
         s += variables.imprimirVariables() + "\n";
         s+= bloque.imprimirBloque();

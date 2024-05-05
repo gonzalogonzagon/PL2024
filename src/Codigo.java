@@ -26,6 +26,10 @@ public class Codigo {
         return variables;
     }
 
+    public Subprograma addSubprograma(Subprograma s){
+        lista_funciones.add(s);
+        return s;
+    }
     
 
     public String imprimirCodigo(String nombreArchivo){

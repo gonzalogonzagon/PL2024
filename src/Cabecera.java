@@ -1,8 +1,15 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cabecera {
     private String tipo;
     private List<Elemento> datos;
+
+
+
+    public Cabecera() {
+        datos = new ArrayList<>();
+    }
 
     public String getTipo() {
         return tipo;
@@ -14,6 +21,11 @@ public class Cabecera {
 
     public List<Elemento> getDatos() {
         return datos;
+    }
+
+    public Elemento addElemento(Elemento e){
+        datos.add(e);
+        return e;
     }
 
     public String imprimirCabecera(){
