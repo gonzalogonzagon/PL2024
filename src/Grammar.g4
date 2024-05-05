@@ -36,14 +36,14 @@ ctes returns [String s]:
     | CONSTLIT {$s = $CONSTLIT.text;}
     ;
 partes :
-    part partes
-    | part
+    part[new Subprograma()] partes
+    | part[new Subprograma()]
     ;
-part :
-    type restpart
+part[Subprograma subp]:
+    type {subp.getCabecera().setTipo($type.s);} restpart
     ;
 restpart :
-    IDENT '(' listparam ')' blq
+    IDENT {subp.setNombre($IDENT.text)} '(' listparam ')' blq
     | IDENT '(' 'void' ')' blq
     ;
 blq :

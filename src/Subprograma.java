@@ -10,6 +10,14 @@ public class Subprograma {
         this.variables = variables;
     }
 
+    public Subprograma(){
+        cabecera = new Cabecera();
+    }
+
+    public Cabecera getCabecera() {
+        return cabecera;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -26,7 +34,7 @@ public class Subprograma {
         }else{
             s += "function " + getNombre();
         }
-        if(!(cabecera.getDatos().size() == 1 && cabecera.getDatos().get(0).getTipo().equals("VOID"))){
+        if(!cabecera.getDatos().isEmpty()){
             if(cabecera.getTipo().equals("VOID")){
                 s += "(" + cabecera.imprimirCabecera() + ")";
             }else{
