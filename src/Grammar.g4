@@ -58,7 +58,7 @@ listparamm :
     |
     ;
 type returns [String s]:
-    'void' {$s = " caso especial aun por tratar";}
+    'void' {$s = "VOID";}
     | 'int' {$s = "INTEGER";}
     | 'float' {$s = "REAL";}
     ;
