@@ -31,7 +31,7 @@ public class Variables {
             s += "var\n";
         }
         for(Elemento elemento: datos){
-            if(elemento.getTipo() == "Integer"){
+            if(elemento.getTipo().equals("INTEGER")){
                 tipoInteger.add(elemento);
             }else{
                 tipoFloat.add(elemento);

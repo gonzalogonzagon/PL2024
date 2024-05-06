@@ -96,7 +96,39 @@ sent[Variables var, Bloque b, String func, int ind] :
     | 'do' {String sent = "repeat"; b.anadirSentencia(new Sentencia(sent, ind)); Bloque nuevoBl = new Bloque();}
     blq[null, nuevoBl, null, ind + 1] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, ind));}
     'until' '(' lcond ')' {sent = "until(" + $lcond.s + ");"; b.anadirSentencia(new Sentencia(sent, ind));}
-    | 'for' '(' IDENT '=' ex1=exp ';' lcond ';' IDENT '=' ex2=exp ')' blq[null, new Bloque(), null, ind + 1]
+    | 'for' '(' id1=IDENT '=' ex1=exp ';' lcond ';' id2=IDENT '=' ex2=exp ')' {
+        String mod = $ex2.s;
+        String[] partes = mod.split(" ");
+        String sent;
+        if(partes[2].equals("1")){ //Incremento o decremento unitario
+            sent = "for " + $id1.text + " := " + $ex1.s;
+            if(partes[1].equals("+")){
+                s += " to ";
+            }else{
+                s += " downto ";
+            }
+            String[] condiciones = $lcond.s.split(" ");
+            s += condiciones[2];
+            s += " do";
+            b.anadirSentencia(new Sentencia(sent, ind));
+            b.anadirSentencia(new Sentencia("begin", ind));
+        }else{
+            sent = $id1.text + " := " $ex1.s;
+            b.anadirSentencia(new Sentencia(sent, ind));
+            sent = "while(" + $lcond.s + ")do";
+            b.anadirSentencia(new Sentencia(sent, ind));
+            b.anadirSentencia(new Sentencia("begin", ind));
+        }
+        Bloque nuevoBl = new Bloque();
+    }
+    blq[var, nuevoBl, null, ind + 1] {
+        if(!partes[2].equals("1")){
+            nuevoBl.anadirSentencia(new Sentencia($id2.text + " := " + $ex2.s, ind));
+        }
+        sent = nuevoBl.imprimirBloque();
+        b.anadirSentencia(new Sentencia(sent, ind));
+        b.anadirSentencia(new Sentencia("end;", ind));
+    }
     ;
 // modificada --- original -> lid : IDENT | lid ',' IDENT;
 lid[Variables var, String t] :
