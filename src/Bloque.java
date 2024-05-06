@@ -20,7 +20,7 @@ public class Bloque {
         String s = "";
         for(Sentencia sentencia: sentencias) {
             if(!(sentencia.imprimirSentencia().equals("\n") || sentencia.imprimirSentencia().isEmpty())){
-                s += "\t" + colocarIdentacion(sentencia) + sentencia.imprimirSentencia() + "\n";
+                s += "\t" + colocarIdentacion(sentencia) + sentencia.imprimirSentencia();
             }
         }
         return s;
