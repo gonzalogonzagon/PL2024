@@ -56,6 +56,3 @@ void main(void) {
     printf();
 
 }
-
-int siuu(void){
-  a = ;

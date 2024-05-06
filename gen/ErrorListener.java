@@ -8,7 +8,19 @@ public class ErrorListener extends BaseErrorListener {
                             String msg,
                             RecognitionException e)
     {
-        System.err.println("line "+line+":"+charPositionInLine+" "+msg);
+        CommonTokenStream tokens =
+                (CommonTokenStream)recognizer.getInputStream();
+        String input = tokens.getTokenSource().getInputStream().toString();
+        String[] lines = input.split("\n");
+        String errorLine = lines[line - 1];
+        String expected = "";
+        switch (errorLine.charAt(charPositionInLine)){
+            case ')':
+                        expected = "numero de argumentos invalido.";
+                        break;
+            default: expected = msg;
+        }
+        System.err.println("linea "+line+":"+charPositionInLine+" "+expected);
         underlineError(recognizer,(Token)offendingSymbol,
                 line, charPositionInLine);
     }
