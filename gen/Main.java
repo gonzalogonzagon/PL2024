@@ -19,6 +19,11 @@ public class Main {
 
             // Crear el objeto correspondiente al analizador sintáctico
             GrammarParser anasint = new GrammarParser(tokens, codigo, codigo.getConstantes(), new Bloque());
+            anasint.removeErrorListeners();
+            ErrorListener errorListener = new ErrorListener();
+            DiagnosticErrorListener diagnostic = new DiagnosticErrorListener();
+            anasint.addErrorListener(errorListener);
+            anasint.addErrorListener(diagnostic);
             /*
             Si se quiere pasar al analizador algún objeto externo con el que trabajar,
             este deberá ser de una clase del mismo paquete
@@ -37,7 +42,6 @@ public class Main {
             //String ruta = "../pracObligatoriaPL/"+args[0]+".html";
 
             String nombreArgs = args[0].substring(0, args[0].length()-2);
-            System.out.println(nombreArgs);
 
             String ruta = nombreArgs+".pas";
             FileWriter archivo = new FileWriter(ruta);
