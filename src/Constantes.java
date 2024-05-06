@@ -19,7 +19,7 @@ public class Constantes { //Lista de constantes
         }
         for(Elemento elemento: datos){
             s += "\t";
-            s += elemento.getId() + "= " + elemento.getValor() + ";\n";
+            s += elemento.getId() + " = " + elemento.getValor() + ";\n";
         }
         return s;
     }
