@@ -5,27 +5,13 @@
 #define GRAVEDAD 9.8
 
 // Función para calcular el área de un círculo
-float calcularAreaCirculo(int radia) {
+float calcularAreaCirculo(int radio) {
     a = 5;
     f(a);
     return PI * radio * radio;
 }
 
 void main(void) {
-
-    for(i=1; a < b; i = i + 1){
-        f(a);
-    }
-
-    while(a < b) {
-        f(a);
-    }
-
-    do {
-        f(a);
-    } until (a < b)
-
-
     int var1;
     int varb1;
     float var2, var3;

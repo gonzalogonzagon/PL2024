@@ -1,18 +1,31 @@
 program prueba;
 const
-	PI= 3.14159;
-	GRAVEDAD= 9.8;
+	PI = 3.14159;
+	GRAVEDAD = 9.8;
 
-function calcularAreaCirculo(radio: INTEGER): REAL;
+function calcularAreaCirculo(radia: INTEGER): REAL;
 begin
 	a := 5;
 	f(a);
 	calcularAreaCirculo := PI * radio * radio;
 end;
-
 var
-var1, var2, var3, : REAL;
+	var1, varb1: INTEGER;
+	var2, var3: REAL;
 begin
+	for i := 1 to b do
+	begin
+		f(a);
+
+	end;
+	while(a < b)do
+	begin
+		f(a);
+	end;
+	repeat
+		f(a);
+
+	until(a < b);
 	a := 6;
 	radio := 5;
 	calcularAreaCirculo();
@@ -39,6 +52,8 @@ begin
 	else
 	begin
 		b := 1 mod 6;
+	printf();
+	b := 6 mod 1;
 	end;
 	printf();
 end.

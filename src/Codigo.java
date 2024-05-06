@@ -44,7 +44,7 @@ public class Codigo {
         for(Subprograma funcion: lista_funciones){
             if(!funcion.getNombre().equals("main")){
                 s += funcion.imprimirSubprograma();
-                s += "\n";
+                //s += "\n";
             }else{
                 main = funcion;
             }

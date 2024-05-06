@@ -91,8 +91,12 @@ sent[Variables var, Bloque b, String func, int ind] :
     blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque() + getInd(ind) + "end"; b.anadirSentencia(new Sentencia(sent, ind));}
     'else' {b.anadirSentencia(new Sentencia("else", ind)); b.anadirSentencia(new Sentencia("begin", ind)); nuevoBl = new Bloque();}
     blq[var, nuevoBl, func, ind + 1] {sent = nuevoBl.imprimirBloque() + getInd(ind) + "end;"; b.anadirSentencia(new Sentencia(sent, ind));}
-    | 'while' '(' lcond ')' {String sent = "while(" + $lcond.s + ")do"; b.anadirSentencia(new Sentencia(sent, ind)); b.anadirSentencia(new Sentencia("begin", ind)); Bloque nuevoBl = new Bloque();}
-    blq[null, nuevoBl, null, ind + 1] {sent = nuevoBl.imprimirBloque() + getInd(ind) + "end;"; b.anadirSentencia(new Sentencia(sent, ind));}
+    | 'while' '(' lcond ')'
+    {String sent = "while(" + $lcond.s + ")do"; b.anadirSentencia(new Sentencia(sent, ind));
+     b.anadirSentencia(new Sentencia("begin", ind)); Bloque nuevoBl = new Bloque();}
+    blq[null, nuevoBl, null, ind + 1]
+    {sent = nuevoBl.imprimirBloque() + getInd(ind) + "end;";
+     b.anadirSentencia(new Sentencia(sent, ind));}
     | 'do' {String sent = "repeat"; b.anadirSentencia(new Sentencia(sent, ind)); Bloque nuevoBl = new Bloque();}
     blq[null, nuevoBl, null, ind + 1] {sent = nuevoBl.imprimirBloque();}
     'until' '(' lcond ')' {sent += + getInd(ind) + "until(" + $lcond.s + ");"; b.anadirSentencia(new Sentencia(sent, ind));}
@@ -103,17 +107,17 @@ sent[Variables var, Bloque b, String func, int ind] :
         if(partes[2].equals("1")){ //Incremento o decremento unitario
             sent = "for " + $id1.text + " := " + $ex1.s;
             if(partes[1].equals("+")){
-                s += " to ";
+                sent += " to ";
             }else{
-                s += " downto ";
+                sent += " downto ";
             }
             String[] condiciones = $lcond.s.split(" ");
-            s += condiciones[2];
-            s += " do";
+            sent += condiciones[2];
+            sent += " do";
             b.anadirSentencia(new Sentencia(sent, ind));
             b.anadirSentencia(new Sentencia("begin", ind));
         }else{
-            sent = $id1.text + " := " $ex1.s;
+            sent = $id1.text + " := " + $ex1.s;
             b.anadirSentencia(new Sentencia(sent, ind));
             sent = "while(" + $lcond.s + ")do";
             b.anadirSentencia(new Sentencia(sent, ind));

@@ -42,7 +42,7 @@ public class Variables {
             for(int i = 0; i < tipoInteger.size() - 1; i++){
                 s += tipoInteger.get(i).getId() + ", ";
             }
-            s += tipoInteger.get(tipoInteger.size() - 1);
+            s += tipoInteger.get(tipoInteger.size() - 1).getId();
             s += ": INTEGER;\n";
         }
         if(!tipoFloat.isEmpty()){
@@ -50,7 +50,7 @@ public class Variables {
             for(int i = 0; i < tipoFloat.size() - 1; i++){
                 s += tipoFloat.get(i).getId() + ", ";
             }
-            s += tipoFloat.get(tipoFloat.size() - 1);
+            s += tipoFloat.get(tipoFloat.size() - 1).getId();
             s += ": REAL;\n";
         }
         return s;

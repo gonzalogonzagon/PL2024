@@ -4,14 +4,15 @@ import java.util.List;
 public class Cabecera {
     private String tipo;
     private List<Elemento> datos;
-    private List<Elemento> listaInteger;
-    private List<Elemento> listaFloat;
+    private List<Elemento> tipoInteger;
+
+    private List<Elemento> tipoFloat;
 
 
     public Cabecera() {
         datos = new ArrayList<>();
-        listaInteger = new ArrayList<>();
-        listaFloat = new ArrayList<>();
+        tipoInteger = new ArrayList<>();
+        tipoFloat = new ArrayList<>();
     }
 
     public String getTipo() {
@@ -31,29 +32,34 @@ public class Cabecera {
         return e;
     }
 
-    for(Elemento elemento: datos){
-        if(elemento.getTipo().equals("INTEGER")){
-            tipoInteger.add(elemento);
-        }else{
-            tipoFloat.add(elemento);
-        }
-    }
+    public String imprimirCabecera() {
 
-    if(!tipoInteger.isEmpty()){
-        s += "\t";
-        for(int i = 0; i < tipoInteger.size() - 1; i++){
-            s += tipoInteger.get(i).getId() + ", ";
+        String s = "";
+
+        for(Elemento elemento: datos){
+            if(elemento.getTipo().equals("INTEGER")){
+                tipoInteger.add(elemento);
+            }else{
+                tipoFloat.add(elemento);
+            }
         }
-        s += tipoInteger.get(tipoInteger.size() - 1);
-        s += ": INTEGER;\n";
-    }
-    if(!tipoFloat.isEmpty()){
-        s += "\t";
-        for(int i = 0; i < tipoFloat.size() - 1; i++){
-            s += tipoFloat.get(i).getId() + ", ";
+
+        if(!tipoInteger.isEmpty()){
+            for(int i = 0; i < tipoInteger.size() - 1; i++){
+                s += tipoInteger.get(i).getId() + ", ";
+            }
+            s += tipoInteger.get(tipoInteger.size() - 1).getId();
+            s += ": INTEGER";
         }
-        s += tipoFloat.get(tipoFloat.size() - 1);
-        s += ": REAL;\n";
+        if(!tipoFloat.isEmpty()){
+            if (!tipoInteger.isEmpty()) s += "; ";
+            for(int i = 0; i < tipoFloat.size() - 1; i++){
+                s += tipoFloat.get(i).getId() + ", ";
+            }
+            s += tipoFloat.get(tipoFloat.size() - 1).getId();
+            s += ": REAL";
+        }
+        return s;
+
     }
-    return s;
 }
