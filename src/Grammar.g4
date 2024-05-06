@@ -96,7 +96,7 @@ sent[Variables var, Bloque b, String func, int ind] :
     | 'do' {String sent = "repeat"; b.anadirSentencia(new Sentencia(sent, ind)); Bloque nuevoBl = new Bloque();}
     blq[null, nuevoBl, null, ind + 1] {sent = nuevoBl.imprimirBloque(); b.anadirSentencia(new Sentencia(sent, ind));}
     'until' '(' lcond ')' {sent = "until(" + $lcond.s + ");"; b.anadirSentencia(new Sentencia(sent, ind));}
-    | 'for' '(' IDENT '=' exp ';' lcond ';' IDENT '=' exp ')' blq[null, new Bloque(), null, ind + 1]
+    | 'for' '(' IDENT '=' ex1=exp ';' lcond ';' IDENT '=' ex2=exp ')' blq[null, new Bloque(), null, ind + 1]
     ;
 // modificada --- original -> lid : IDENT | lid ',' IDENT;
 lid[Variables var, String t] :
