@@ -19,9 +19,7 @@ public class Bloque {
     public String imprimirBloque(){
         String s = "";
         for(Sentencia sentencia: sentencias) {
-            if(!(sentencia.imprimirSentencia().equals("\n") || sentencia.imprimirSentencia().isEmpty())){
-                s += "\t" + colocarIdentacion(sentencia) + sentencia.imprimirSentencia();
-            }
+            s += "\t" + colocarIdentacion(sentencia) + sentencia.imprimirSentencia();
         }
         return s;
     }
