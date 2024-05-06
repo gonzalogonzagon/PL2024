@@ -125,9 +125,7 @@ sent[Variables var, Bloque b, String func, int ind] :
         if(!partes[2].equals("1")){
             nuevoBl.anadirSentencia(new Sentencia($id2.text + " := " + $ex2.s, ind));
         }
-        sent = nuevoBl.imprimirBloque();
-        b.anadirSentencia(new Sentencia(sent, ind));
-        b.anadirSentencia(new Sentencia("end;", ind));
+        sent = nuevoBl.imprimirBloque() + getInd(ind) + "end;";
     }
     ;
 // modificada --- original -> lid : IDENT | lid ',' IDENT;
