@@ -31,41 +31,24 @@ public class Codigo {
         lista_funciones.add(s);
         return s;
     }
-    
+
 
     public String imprimirCodigo(String nombreArchivo){
         //nombreArchivo es el nombre del programa (el nombre del archivo por defecto)
         String s = "";
-        boolean hayMain = false;
-
         s += "program " + nombreArchivo + ";\n";
         s += constantes.imprimirConstantes();
-
         if(!constantes.getDatos().isEmpty()){
             s += "\n";
         }
-
         for(Subprograma funcion: lista_funciones){
-            if(funcion.getNombre().equals("main")){
-                hayMain = true;
+            if(!funcion.getNombre().equals("main")){
+                s += funcion.imprimirSubprograma();
+                //s += "\n";
+            }else{
+                main = funcion;
             }
         }
-
-        if(!hayMain){
-            for(Subprograma funcion: lista_funciones){
-                funcion.setNombre("unit");
-            }
-        }else{
-            for(Subprograma funcion: lista_funciones){
-                if(!funcion.getNombre().equals("main")){
-                    s += funcion.imprimirSubprograma();
-                    //s += "\n";
-                }else{
-                    main = funcion;
-                }
-            }
-        }
-
         s += main.getVariables().imprimirVariables();
         s += "begin\n";
         s += main.getBloque().imprimirBloque();
