@@ -17,9 +17,6 @@ public class Sentencia {
     }
 
     public String imprimirSentencia(){
-        if(!sent.isEmpty()){
-            return sent + "\n";
-        }
-        return "";
+        return sent + "\n";
     }
 }
