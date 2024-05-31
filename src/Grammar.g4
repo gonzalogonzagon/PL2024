@@ -146,7 +146,7 @@ lexp returns [String s]:
     exp lexpp {$s = $exp.s + $lexpp.s;}
     ;
 lexpp returns [String s]:
-    ',' lexpp {$s = ", " + $lexpp.s;}
+    ',' exp lexpp {$s = ", " + $exp.s + $lexpp.s;}
     | {$s = "";}
     ;
 // modificada --- original -> exp : exp op exp | factor;
