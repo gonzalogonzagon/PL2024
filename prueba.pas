@@ -1,59 +1,26 @@
 program prueba;
-const
-	PI = 3.14159;
-	GRAVEDAD = 9.8;
-
-function calcularAreaCirculo(radia: INTEGER): REAL;
+procedure procedimiento;
 begin
-	a := 5;
-	f(a);
-	calcularAreaCirculo := PI * radio * radio;
+	a := a - 3;
 end;
 var
-	var1, varb1: INTEGER;
-	var2, var3: REAL;
+	a, b: INTEGER;
 begin
-	for i := 1 to b do
+	a := a * 3 mod 1;
+	b := b - a;
+	if(a > b)then
 	begin
-		f(a);
-
-	end;
-	while(a < b)do
-	begin
-		f(a);
-	end;
-	repeat
-		f(a);
-
-	until(a < b);
-	a := 6;
-	radio := 5;
-	calcularAreaCirculo();
-	if(q < e)then
-	begin
-		a := 2 * 4;
-		if(a = d)then
+			if(a < 3 OR b > 2 AND a = 3null)then
 		begin
-			d := 4 div 1;
+			a := a * 3;
 		end
 		else
 		begin
-			y := 54 - 23;
-			if(NOT (a < b))then
-			begin
-				a := 5 * 3;
-			end
-			else
-			begin
-				q := 7 div 3;
-			end;
+			b := c div 6;
 		end;
 	end
 	else
 	begin
-		b := 1 mod 6;
-	printf();
-	b := 6 mod 1;
+		c := c + 1;
 	end;
-	printf();
 end.

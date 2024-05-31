@@ -213,11 +213,11 @@ CONSTINT: DECIMAL_INTEGER_CONST | OCTAL_INTEGER_CONST | HEXA_INTEGER_CONST;
 CONSTFLOAT: DECIMAL_REAL_CONST | OCTAL_REAL_CONST | HEXA_REAL_CONST;
 
 DECIMAL_INTEGER_CONST: ('+'|'-')? DEC_DIGIT+;
-OCTAL_INTEGER_CONST: ('+'|'-')? '0' OCT_DIGIT+;
-HEXA_INTEGER_CONST: ('+'|'-')? '0x' HEX_DIGIT+;
+OCTAL_INTEGER_CONST: '0' ('+'|'-')? OCT_DIGIT+;
+HEXA_INTEGER_CONST: '0x' ('+'|'-')? HEX_DIGIT+;
 DECIMAL_REAL_CONST: ('+'|'-')? DEC_DIGIT+ '.' DEC_DIGIT+;
-OCTAL_REAL_CONST: ('+'|'-')? '0' OCT_DIGIT+ '.' OCT_DIGIT+;
-HEXA_REAL_CONST: ('+'|'-')? '0x' HEX_DIGIT+ '.' HEX_DIGIT+;
+OCTAL_REAL_CONST: '0' ('+'|'-')? OCT_DIGIT+ '.' OCT_DIGIT+;
+HEXA_REAL_CONST: '0x' ('+'|'-')? HEX_DIGIT+ '.' HEX_DIGIT+;
 
 //Constantes literales
 CONSTLIT : '\'' ( ~'\'' | '\\' '\'' )* '\'' ;
@@ -234,11 +234,11 @@ B   :   ' '+    ->  skip;
 IG  :   .   ->  skip;
 
 fragment
-DEC_DIGIT: [1-9]; //Digitos del 1 al 9
+DEC_DIGIT: [0-9]; //Digitos del 0 al 9
 fragment
-OCT_DIGIT: [0-9]; //Digitos del 0 al 9
+OCT_DIGIT: [0-7]; //Digitos del 0 al 7
 fragment
-HEX_DIGIT: [0-9]; //Digitos del 0 al 9
+HEX_DIGIT: [0-9] | [A-F]; //Digitos del 0 al 9 o letras de la A a la F
 
 
 // /t tabulación
