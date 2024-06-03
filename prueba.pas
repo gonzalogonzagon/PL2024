@@ -1,26 +1,53 @@
 program prueba;
-procedure procedimiento;
-begin
-	a := a - 3;
-end;
 var
-	a, b: INTEGER;
+	a: INTEGER;
 begin
-	a := a * 3 mod 10;
-	b := b - a;
-	if(a > b)then
+	for i := 1 to 5 do
 	begin
-			if(a < 3 OR b > 2 AND a = 3)then
+			for j := 1 to 3 do
 		begin
-			a := a * 3;
+			a := 3;
+		end;
+	end;
+	for i := 1 downto 8 do
+	begin
+		a := b div 3 * 4;
+	end;
+	i := 1
+	while(i < 10)do
+	begin
+		a := i div 6;
+	i := i + 3
+	end;
+	while(a > b)do
+	begin
+			for i := 0 to 10 do
+		begin
+			c := d - i;
+		end;
+	end;
+	repeat
+			if(a < b)then
+		begin
+					if(a > 2)then
+			begin
+				a := a + 1;
+			end
+			else
+			begin
+				b := b + 1;
+			end;
 		end
 		else
 		begin
-			b := c div 6;
+					if(a < 5)then
+			begin
+				a := a - 1;
+			end
+			else
+			begin
+				b := b - 1;
+			end;
 		end;
-	end
-	else
-	begin
-		c := c + 1;
-	end;
+	until(a > b);
 end.

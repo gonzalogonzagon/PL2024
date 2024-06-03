@@ -1113,7 +1113,7 @@ public class GrammarParser extends Parser {
 				String sent = "while(" + ((SentContext)_localctx).lcond.s + ")do"; b.anadirSentencia(new Sentencia(sent, ind));
 				     b.anadirSentencia(new Sentencia("begin", ind)); Bloque nuevoBl = new Bloque();
 				setState(180);
-				blq(null, nuevoBl, null, ind + 1);
+				blq(var, nuevoBl, null, ind + 1);
 				sent = nuevoBl.imprimirBloque() + getInd(ind) + "end;";
 				     b.anadirSentencia(new Sentencia(sent, ind));
 				}
@@ -1125,7 +1125,7 @@ public class GrammarParser extends Parser {
 				match(T__15);
 				String sent = "repeat"; b.anadirSentencia(new Sentencia(sent, ind)); Bloque nuevoBl = new Bloque();
 				setState(185);
-				blq(null, nuevoBl, null, ind + 1);
+				blq(var, nuevoBl, null, ind + 1);
 				sent = nuevoBl.imprimirBloque();
 				setState(187);
 				match(T__16);
@@ -1253,7 +1253,7 @@ public class GrammarParser extends Parser {
 			{
 			setState(211);
 			((LidContext)_localctx).IDENT = match(IDENT);
-			var.anadirElemento(new Elemento((((LidContext)_localctx).IDENT!=null?((LidContext)_localctx).IDENT.getText():null), _localctx.t));
+			var.anadirElemento(new Elemento((((LidContext)_localctx).IDENT!=null?((LidContext)_localctx).IDENT.getText():null), _localctx.t));System.out.println((((LidContext)_localctx).IDENT!=null?((LidContext)_localctx).IDENT.getText():null));
 			setState(213);
 			lidd(var, t);
 			}
