@@ -99,7 +99,7 @@ sent[Variables var, Bloque b, String func, int ind] :
      b.anadirSentencia(new Sentencia(sent, ind));}
     | 'do' {String sent = "repeat"; b.anadirSentencia(new Sentencia(sent, ind)); Bloque nuevoBl = new Bloque();}
     blq[null, nuevoBl, null, ind + 1] {sent = nuevoBl.imprimirBloque();}
-    'until' '(' lcond ')' {sent += + getInd(ind) + "until(" + $lcond.s + ");"; b.anadirSentencia(new Sentencia(sent, ind));}
+    'until' '(' lcond ')' {sent += getInd(ind) + "until(" + $lcond.s + ");"; b.anadirSentencia(new Sentencia(sent, ind));}
     | 'for' '(' id1=IDENT '=' ex1=exp ';' lcond ';' id2=IDENT '=' ex2=exp ')' {
         String mod = $ex2.s;
         String[] partes = mod.split(" ");
@@ -179,7 +179,7 @@ lcond returns [String s]:
     ;
 lcondd returns [String s]:
     opl cond2Types lcondd {$s = " " + $opl.s + " " + $cond2Types.s + $lcondd.s;}
-    |
+    | {$s = "";}
     ;
 opl returns [String s]:
     '||' {$s = "OR";}

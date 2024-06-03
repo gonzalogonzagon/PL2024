@@ -6,11 +6,11 @@ end;
 var
 	a, b: INTEGER;
 begin
-	a := a * 3 mod 1;
+	a := a * 3 mod 10;
 	b := b - a;
 	if(a > b)then
 	begin
-			if(a < 3 OR b > 2 AND a = 3null)then
+			if(a < 3 OR b > 2 AND a = 3)then
 		begin
 			a := a * 3;
 		end
