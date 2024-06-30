@@ -1,53 +1,20 @@
 program prueba;
-var
-	a: INTEGER;
+function operacion(a: INTEGER; b: REAL): INTEGER;
 begin
-	for i := 1 to 5 do
+	a := a + 2;
+	b := b - 3 div 2;
+	operacion := a + b;
+end;
+var
+	a, c, b: INTEGER;
+begin
+	if(a >= 3 OR b <= c AND c = 0 AND NOT (a < 2))then
 	begin
-			for j := 1 to 3 do
-		begin
-			a := 3;
-		end;
-	end;
-	for i := 1 downto 8 do
+		a := b * c + 2 - 8;
+	b := a div 3 mod 2;
+	end
+	else
 	begin
-		a := b div 3 * 4;
+		c := 3 * operacion (a, b) div 8 mod operacion (b, a);
 	end;
-	i := 1
-	while(i < 10)do
-	begin
-		a := 'constante literal con ' contenido ' entrecomillado';
-	i := i + 3
-	end;
-	while(a > b)do
-	begin
-			for i := 0 to 10 do
-		begin
-			c := d - i;
-		end;
-	end;
-	repeat
-			if(a < b)then
-		begin
-					if(a > 2)then
-			begin
-				a := a + 1;
-			end
-			else
-			begin
-				b := b + 1;
-			end;
-		end
-		else
-		begin
-					if(a < 5)then
-			begin
-				a := a - 1;
-			end
-			else
-			begin
-				b := b - 1;
-			end;
-		end;
-	until(a > b);
 end.

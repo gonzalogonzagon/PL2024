@@ -1,41 +1,18 @@
+int operacion(int a, float b){
+    a = a + 2;
+    b = b - 3 / 2;
+    return a + b;
+}
+
 void main(void){
+//Prueba de expresiones y condiciones logicas
 int a;
-    //For anidado e incrementales en una unidad
-    for(i = 1; i < 5; i = i + 1){
-        for(j = 1; j < 3; j = j + 1){
-            a = 3;
-        }
+int c;
+    if(a >= 3 || b <= c && c == 0 && !a < 2){
+        int b;
+        a = b * c + 2 - 8;
+        b = a / 3 % 2;
+    }else{
+        c = 3 * operacion(a,b) / 8 % operacion(b,a);
     }
-    //For con decremento de una unidad
-    for(i = 1; i > 8; i = i - 1){
-        a = b / 3 * 4;
-    }
-    //For con incremento de mas de una unidad
-    for(i = 1; i < 10; i = i + 3){
-        a = 'constante literal con \' contenido \' entrecomillado';
-    }
-    //While con un for dentro
-    while(a > b){
-        //int c;
-        //float d;
-        for(i = 0; i < 10; i = i + 1){
-            c = d - i;
-        }
-    }
-    //do-until con if anidados
-    do{
-        if(a < b){
-            if(a > 2){
-                a = a + 1;
-            }else{
-                b = b + 1;
-            }
-        }else{
-            if(a < 5){
-                a = a - 1;
-            }else{
-                b = b - 1;
-            }
-        }
-    }until(a > b)
 }
