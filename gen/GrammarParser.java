@@ -317,7 +317,7 @@ public class GrammarParser extends Parser {
 				{
 				setState(72);
 				((CtesContext)_localctx).CONSTLIT = match(CONSTLIT);
-				((CtesContext)_localctx).s =  (((CtesContext)_localctx).CONSTLIT!=null?((CtesContext)_localctx).CONSTLIT.getText():null);
+				String contenido = (((CtesContext)_localctx).CONSTLIT!=null?((CtesContext)_localctx).CONSTLIT.getText():null); ((CtesContext)_localctx).s =  contenido.replace("\\", "");
 				}
 				break;
 			default:
@@ -1253,7 +1253,7 @@ public class GrammarParser extends Parser {
 			{
 			setState(211);
 			((LidContext)_localctx).IDENT = match(IDENT);
-			var.anadirElemento(new Elemento((((LidContext)_localctx).IDENT!=null?((LidContext)_localctx).IDENT.getText():null), _localctx.t));System.out.println((((LidContext)_localctx).IDENT!=null?((LidContext)_localctx).IDENT.getText():null));
+			var.anadirElemento(new Elemento((((LidContext)_localctx).IDENT!=null?((LidContext)_localctx).IDENT.getText():null), _localctx.t));
 			setState(213);
 			lidd(var, t);
 			}

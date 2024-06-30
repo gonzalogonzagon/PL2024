@@ -41,7 +41,7 @@ defines:
 ctes returns [String s]:
     CONSTINT {$s = $CONSTINT.text;}
     | CONSTFLOAT {$s = $CONSTFLOAT.text;}
-    | CONSTLIT {$s = $CONSTLIT.text;}
+    | CONSTLIT {String contenido = $CONSTLIT.text; $s = contenido.replace("\\", "");}
     ;
 partes :
     part[codigo.addSubprograma(new Subprograma())] partes

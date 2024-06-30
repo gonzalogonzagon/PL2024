@@ -16,7 +16,7 @@ begin
 	i := 1
 	while(i < 10)do
 	begin
-		a := i div 6;
+		a := 'constante literal con ' contenido ' entrecomillado';
 	i := i + 3
 	end;
 	while(a > b)do

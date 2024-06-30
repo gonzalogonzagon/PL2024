@@ -15,10 +15,65 @@ public class ErrorListener extends BaseErrorListener {
         String errorLine = lines[line - 1];
         String expected = "";
         switch (errorLine.charAt(charPositionInLine)){
+            case '(':
+                expected = "No se encuentra expresion o fin de linea antes del parentesis de apertura ('(').";
+                break;
+            case '{':
+                expected = "No se encuentra expresion o fin de linea antes de la llave de apertura ('{').";
+                break;
+            case '[':
+                expected = "No se encuentra expresion o fin de linea antes del corchete de apertura ('[').";
+                break;
             case ')':
-                        expected = "numero de argumentos invalido.";
-                        break;
-            default: expected = msg;
+                expected = "numero de argumentos invalido.";
+                break;
+            case '}':
+                expected = "llave de cierre sin coincidencia.";
+                break;
+            case ']':
+                expected = "corchete de cierre sin coincidencia.";
+                break;
+            case ',':
+                expected = "coma inesperada.";
+                break;
+            case ';':
+                expected = "falta punto y coma al final de la instruccion.";
+                break;
+            case '=':
+                expected = "falta identificador.";
+                break;
+            case '+':
+                expected = "No se encuentra identificador o valor numerico antes del operador ('+').";
+                break;
+            case '-':
+                expected = "No se encuentra identificador o valor numerico antes del operador ('-').";
+                break;
+            case '*':
+                expected = "No se encuentra identificador o valor numerico antes del operador ('*').";
+                break;
+            case '/':
+                expected = "No se encuentra identificador o valor numerico antes del operador ('/').";
+                break;
+            case '%':
+                expected = "No se encuentra identificador o valor numerico antes del operador ('%').";
+                break;
+            case '<':
+                expected = "No se encuentra identificador o valor numerico antes del operador ('<').";
+                break;
+            case '>':
+                expected = "No se encuentra identificador o valor numerico antes del operador ('>').";
+                break;
+            case '!':
+                expected = "No se encuentra identificador o expresion booleana antes del operador ('!').";
+                break;
+            case '&':
+                expected = "No se encuentra identificador o expresion booleana antes del operador ('&').";
+                break;
+            case '|':
+                expected = "No se encuentra identificador o expresion booleana antes del operador ('|').";
+                break;
+            default:
+                expected = msg;
         }
         System.err.println("linea "+line+":"+charPositionInLine+" "+expected);
         underlineError(recognizer,(Token)offendingSymbol,
@@ -42,3 +97,4 @@ public class ErrorListener extends BaseErrorListener {
         System.err.println();
     }
 }
+

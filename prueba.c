@@ -12,7 +12,7 @@ int a;
     }
     //For con incremento de mas de una unidad
     for(i = 1; i < 10; i = i + 3){
-        a = i / 6;
+        a = 'constante literal con \' contenido \' entrecomillado';
     }
     //While con un for dentro
     while(a > b){
